@@ -7,8 +7,9 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import * as AdaptiveCards from "adaptivecards";
 import { Button, Loader, Dropdown, Text, Flex, Input, TextArea, RadioGroup } from '@fluentui/react-northstar'
+import { TrashCanIcon, AddIcon, FilesUploadIcon } from '@fluentui/react-icons-northstar'
 import * as microsoftTeams from "@microsoft/teams-js";
-
+import Resizer from 'react-image-file-resizer';
 import './newMessage.scss';
 import './teamTheme.scss';
 import { getDraftNotification, getTeams, createDraftNotification, updateDraftNotification, searchGroups, getGroups, verifyGroupAccess } from '../../apis/messageListApi';
@@ -84,6 +85,7 @@ export interface INewMessageProps extends RouteComponentProps, WithTranslation {
 class NewMessage extends React.Component<INewMessageProps, formState> {
     readonly localize: TFunction;
     private card: any;
+    fileInput: any;
 
     constructor(props: INewMessageProps) {
         super(props);
@@ -91,9 +93,11 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
         this.localize = this.props.t;
         this.card = getInitAdaptiveCard(this.localize);
         this.setDefaultCard(this.card);
+        this.fileInput = React.createRef();
+        this.handleImageSelection = this.handleImageSelection.bind(this);
 
         this.state = {
-            title: "",
+            title: "test",
             summary: "",
             author: "",
             btnLink: "",
@@ -119,9 +123,49 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
             selectedRosters: [],
             selectedGroups: [],
             errorImageUrlMessage: "",
-            errorButtonUrlMessage: "",
+            errorButtonUrlMessage: ""
+        }
+
+    }
+
+    private handleImageSelection() {
+        //get the first file selected
+        const file = this.fileInput.current.files[0];
+        if (file) { //if we have a file
+            //resize the image to fit in the adaptivecard
+            var cardsize = JSON.stringify(this.card).length;
+            Resizer.imageFileResizer(file, 400, 400, 'JPEG', 80, 0,
+                uri => {
+                    if (uri.toString().length < 30720) {
+                        //everything is ok with the image, lets set it on the card and update
+                        setCardImageLink(this.card, uri.toString());
+                        this.updateCard();
+                        //lets set the state with the image value
+                        this.setState({
+                            imageLink: uri.toString()
+                        }
+                        );
+                    } else {
+                        var errormsg = this.localize("ErrorImageTooBig") + " " + this.localize("ErrorImageTooBigSize") + " " + (30720 - cardsize) + " bytes.";
+                        //images bigger than 32K cannot be saved, set the error message to be presented
+                        this.setState({
+                            errorImageUrlMessage: errormsg
+                        });
+                    }
+
+                },
+                'base64'); //we need the image in base64
         }
     }
+    private handleUploadClick = (event: any) => {
+        //reset the error message and the image link as the upload will reset them potentially
+        this.setState({
+            errorImageUrlMessage: "",
+            imageLink: ""
+        });
+        //fire the fileinput click event and run the handleimageselection function
+        this.fileInput.current.click();
+    };
 
     public async componentDidMount() {
         microsoftTeams.initialize();
@@ -342,14 +386,28 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
                                             fluid
                                         />
 
-                                        <Input fluid className="inputField"
-                                            value={this.state.imageLink}
-                                            label={this.localize("ImageURL")}
-                                            placeholder={this.localize("ImageURL")}
-                                            onChange={this.onImageLinkChanged}
-                                            error={!(this.state.errorImageUrlMessage === "")}
-                                            autoComplete="off"
-                                        />
+                                        <Flex gap="gap.smaller" vAlign="end" className="inputField">
+                                            <Input
+                                                value={this.state.imageLink}
+                                                label={this.localize("ImageURL")}
+                                                placeholder={this.localize("ImageURLPlaceHolder")}
+                                                onChange={this.onImageLinkChanged}
+                                                error={!(this.state.errorImageUrlMessage === "")}
+                                                autoComplete="off"
+                                                fluid
+                                            />
+                                            <input type="file" accept="image/"
+                                                style={{ display: 'none' }}
+                                                onChange={this.handleImageSelection}
+                                                ref={this.fileInput} />
+                                            <Flex.Item push>
+                                                <Button circular onClick={this.handleUploadClick}
+                                                    size="small"
+                                                    icon={<FilesUploadIcon />}
+                                                    title={this.localize("UploadImage")}
+                                                />
+                                            </Flex.Item>
+                                        </Flex>
                                         <Text className={(this.state.errorImageUrlMessage === "") ? "hide" : "show"} error size="small" content={this.state.errorImageUrlMessage} />
 
                                         <div className="textArea">
