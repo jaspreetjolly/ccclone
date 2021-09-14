@@ -92,6 +92,7 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
         initializeIcons();
         this.localize = this.props.t;
         this.card = getInitAdaptiveCard(this.localize);
+
         this.setDefaultCard(this.card);
         this.fileInput = React.createRef();
         this.handleImageSelection = this.handleImageSelection.bind(this);
