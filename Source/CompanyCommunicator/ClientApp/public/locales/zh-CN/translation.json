@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "你没有任何草稿邮件。",
   "EmptySentMessages": "你未发送任何邮件。",
   "TitleText": "职务",
+  "SubtitleText": "",
   "PlaceHolderTitle": "标题(必填)",
   "Recipients": "收件人",
   "Sent": "已发送",
