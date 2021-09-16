@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "您沒有草稿郵件。",
   "EmptySentMessages": "您沒有已傳送的郵件。",
   "TitleText": "標題",
+  "SubtitleText": "",
   "PlaceHolderTitle": "標題 (必要)",
   "Recipients": "收件者",
   "Sent": "已傳送",
