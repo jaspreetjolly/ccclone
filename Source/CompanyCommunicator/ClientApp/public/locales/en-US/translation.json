@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "You have no draft messages.",
   "EmptySentMessages": "You have no sent messages.",
   "TitleText": "Title",
+  "SubtitleText": "",
   "PlaceHolderTitle": "Title (required)",
   "Recipients": "Recipients",
   "Sent": "Sent",
