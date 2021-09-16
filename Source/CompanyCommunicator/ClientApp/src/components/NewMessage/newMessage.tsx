@@ -845,8 +845,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
     }
 
     private onTitleChanged = (event: any) => {
-        let showDefaultCard = (!event.target.value && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
+        let showDefaultCard = (!event.target.value && !this.state.subtitle && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
         setCardTitle(this.card, event.target.value);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardImageLink(this.card, this.state.imageLink);
         setCardSummary(this.card, this.state.summary);
         setCardAuthor(this.card, this.state.author);
@@ -863,8 +864,8 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
     }
 
     private onSubtitleChanged = (event: any) => {
-        let showDefaultCard = (!event.target.value && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
-        setCardTitle(this.card, event.target.value);
+        let showDefaultCard = (!event.target.value && !this.state.title && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
+        setCardTitle(this.card, this.state.title);
         setCardSubtitle(this.card, event.target.value);
         setCardImageLink(this.card, this.state.imageLink);
         setCardSummary(this.card, this.state.summary);
@@ -893,8 +894,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
             });
         }
 
-        let showDefaultCard = (!this.state.title && !event.target.value && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
+        let showDefaultCard = (!this.state.title && !this.state.subtitle && !event.target.value && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
         setCardTitle(this.card, this.state.title);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardImageLink(this.card, event.target.value);
         setCardSummary(this.card, this.state.summary);
         setCardAuthor(this.card, this.state.author);
@@ -911,8 +913,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
     }
 
     private onSummaryChanged = (event: any) => {
-        let showDefaultCard = (!this.state.title && !this.state.imageLink && !event.target.value && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
+        let showDefaultCard = (!this.state.title && !this.state.subtitle && !this.state.imageLink && !event.target.value && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
         setCardTitle(this.card, this.state.title);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardImageLink(this.card, this.state.imageLink);
         setCardSummary(this.card, event.target.value);
         setCardAuthor(this.card, this.state.author);
@@ -929,8 +932,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
     }
 
     private onAuthorChanged = (event: any) => {
-        let showDefaultCard = (!this.state.title && !this.state.imageLink && !this.state.summary && !event.target.value && !this.state.btnTitle && !this.state.btnLink);
+        let showDefaultCard = (!this.state.title && !this.state.subtitle && !this.state.imageLink && !this.state.summary && !event.target.value && !this.state.btnTitle && !this.state.btnLink);
         setCardTitle(this.card, this.state.title);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardImageLink(this.card, this.state.imageLink);
         setCardSummary(this.card, this.state.summary);
         setCardAuthor(this.card, event.target.value);
@@ -947,8 +951,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
     }
 
     private onBtnTitleChanged = (event: any) => {
-        const showDefaultCard = (!this.state.title && !this.state.imageLink && !this.state.summary && !this.state.author && !event.target.value && !this.state.btnLink);
+        const showDefaultCard = (!this.state.title && !this.state.subtitle && !this.state.imageLink && !this.state.summary && !this.state.author && !event.target.value && !this.state.btnLink);
         setCardTitle(this.card, this.state.title);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardImageLink(this.card, this.state.imageLink);
         setCardSummary(this.card, this.state.summary);
         setCardAuthor(this.card, this.state.author);
@@ -987,8 +992,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
             });
         }
 
-        const showDefaultCard = (!this.state.title && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !event.target.value);
+        const showDefaultCard = (!this.state.title && !this.state.subtitle && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !event.target.value);
         setCardTitle(this.card, this.state.title);
+        setCardSubtitle(this.card, this.state.subtitle);
         setCardSummary(this.card, this.state.summary);
         setCardAuthor(this.card, this.state.author);
         setCardImageLink(this.card, this.state.imageLink);
