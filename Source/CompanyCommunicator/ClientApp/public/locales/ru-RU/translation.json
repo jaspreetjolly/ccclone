@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "У вас нет черновиков.",
   "EmptySentMessages": "У вас нет отправленных сообщений.",
   "TitleText": "Название",
+  "SubtitleText": "",
   "PlaceHolderTitle": "Название (обязательно)",
   "Recipients": "Получатели",
   "Sent": "Отправлено",
