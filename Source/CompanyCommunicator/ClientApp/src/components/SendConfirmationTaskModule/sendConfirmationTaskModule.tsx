@@ -12,7 +12,7 @@ import './sendConfirmationTaskModule.scss';
 import { getDraftNotification, getConsentSummaries, sendDraftNotification } from '../../apis/messageListApi';
 import {
     getInitAdaptiveCard, setCardTitle, setCardImageLink, setCardSummary,
-    setCardAuthor, setCardBtn
+    setCardAuthor, setCardBtn, setCardSubtitle
 } from '../AdaptiveCard/adaptiveCard';
 import { ImageUtil } from '../../utility/imageutility';
 import { TFunction } from "i18next";
@@ -25,6 +25,7 @@ export interface IListItem {
 export interface IMessage {
     id: string;
     title: string;
+    subtitle: string;
     acknowledgements?: number;
     reactions?: number;
     responses?: number;
@@ -97,6 +98,7 @@ class SendConfirmationTaskModule extends React.Component<SendConfirmationTaskMod
                             loader: false
                         }, () => {
                             setCardTitle(this.card, this.state.message.title);
+                            setCardSubtitle(this.card, this.state.message.subtitle);
                             setCardImageLink(this.card, this.state.message.imageLink);
                             setCardSummary(this.card, this.state.message.summary);
                             setCardAuthor(this.card, this.state.message.author);
