@@ -15,7 +15,7 @@ import './teamTheme.scss';
 import { getDraftNotification, getTeams, createDraftNotification, updateDraftNotification, searchGroups, getGroups, verifyGroupAccess } from '../../apis/messageListApi';
 import {
     getInitAdaptiveCard, setCardTitle, setCardImageLink, setCardSummary,
-    setCardAuthor, setCardBtn
+    setCardAuthor, setCardBtn,setCardSubtitle
 } from '../AdaptiveCard/adaptiveCard';
 import { getBaseUrl } from '../../configVariables';
 import { ImageUtil } from '../../utility/imageutility';
@@ -34,6 +34,7 @@ type dropdownItem = {
 export interface IDraftMessage {
     id?: string,
     title: string,
+    subtitle: string,
     imageLink?: string,
     summary?: string,
     author: string,
@@ -47,6 +48,7 @@ export interface IDraftMessage {
 
 export interface formState {
     title: string,
+    subtitle: string,
     summary?: string,
     btnLink?: string,
     imageLink?: string,
@@ -92,13 +94,13 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
         initializeIcons();
         this.localize = this.props.t;
         this.card = getInitAdaptiveCard(this.localize);
-
         this.setDefaultCard(this.card);
         this.fileInput = React.createRef();
         this.handleImageSelection = this.handleImageSelection.bind(this);
 
         this.state = {
             title: "test",
+            subtitle: "",
             summary: "",
             author: "",
             btnLink: "",
@@ -248,11 +250,13 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
 
     public setDefaultCard = (card: any) => {
         const titleAsString = this.localize("TitleText");
+        const subtitleAsString = this.localize("SubtitleText");
         const summaryAsString = this.localize("Summary");
         const authorAsString = this.localize("Author1");
         const buttonTitleAsString = this.localize("ButtonTitle");
 
         setCardTitle(card, titleAsString);
+        setCardSubtitle(card, subtitleAsString);
         let imgUrl = getBaseUrl() + "/image/imagePlaceholder.png";
         setCardImageLink(card, imgUrl);
         setCardSummary(card, summaryAsString);
@@ -337,6 +341,7 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
             });
 
             setCardTitle(this.card, draftMessageDetail.title);
+            setCardSubtitle(this.card, draftMessageDetail.subtitle);
             setCardImageLink(this.card, draftMessageDetail.imageLink);
             setCardSummary(this.card, draftMessageDetail.summary);
             setCardAuthor(this.card, draftMessageDetail.author);
@@ -344,6 +349,7 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
 
             this.setState({
                 title: draftMessageDetail.title,
+                subtitle: draftMessageDetail.subtitle,
                 summary: draftMessageDetail.summary,
                 btnLink: draftMessageDetail.buttonLink,
                 imageLink: draftMessageDetail.imageLink,
@@ -383,6 +389,15 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
                                             label={this.localize("TitleText")}
                                             placeholder={this.localize("PlaceHolderTitle")}
                                             onChange={this.onTitleChanged}
+                                            autoComplete="off"
+                                            fluid
+                                        />
+
+                                        <Input className="inputField"
+                                            value={this.state.subtitle}
+                                            label={this.localize("SubtitleText")}
+                                            placeholder={this.localize("PlaceHolderSubtitle")}
+                                            onChange={this.onSubtitleChanged}
                                             autoComplete="off"
                                             fluid
                                         />
@@ -768,6 +783,7 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
         const draftMessage: IDraftMessage = {
             id: this.state.messageId,
             title: this.state.title,
+            subtitle: this.state.subtitle,
             imageLink: this.state.imageLink,
             summary: this.state.summary,
             author: this.state.author,
@@ -837,6 +853,25 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
         setCardBtn(this.card, this.state.btnTitle, this.state.btnLink);
         this.setState({
             title: event.target.value,
+            card: this.card
+        }, () => {
+            if (showDefaultCard) {
+                this.setDefaultCard(this.card);
+            }
+            this.updateCard();
+        });
+    }
+
+    private onSubtitleChanged = (event: any) => {
+        let showDefaultCard = (!event.target.value && !this.state.imageLink && !this.state.summary && !this.state.author && !this.state.btnTitle && !this.state.btnLink);
+        setCardTitle(this.card, event.target.value);
+        setCardSubtitle(this.card, event.target.value);
+        setCardImageLink(this.card, this.state.imageLink);
+        setCardSummary(this.card, this.state.summary);
+        setCardAuthor(this.card, this.state.author);
+        setCardBtn(this.card, this.state.btnTitle, this.state.btnLink);
+        this.setState({
+            subtitle: event.target.value,
             card: this.card
         }, () => {
             if (showDefaultCard) {
