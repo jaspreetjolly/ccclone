@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "下書きメッセージはありません。",
   "EmptySentMessages": "送信メッセージはありません。",
   "TitleText": "タイトル",
+  "SubtitleText": "",
   "PlaceHolderTitle": "タイトル (必須)",
   "Recipients": "受信者",
   "Sent": "送信済み",
