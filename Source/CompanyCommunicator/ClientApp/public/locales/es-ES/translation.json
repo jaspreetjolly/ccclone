@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "No tiene borradores de mensajes.",
   "EmptySentMessages": "No tiene mensajes enviados.",
   "TitleText": "Título",
+  "SubtitleText": "",
   "PlaceHolderTitle": "Título (obligatorio)",
   "Recipients": "Destinatarios",
   "Sent": "Enviado",
