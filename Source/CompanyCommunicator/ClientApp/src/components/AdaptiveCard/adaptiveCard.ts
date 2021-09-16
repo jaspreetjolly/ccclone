@@ -17,6 +17,11 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                     "wrap": true
                 },
                 {
+                    "type": "TextBlock",
+                    "size": "ExtraLarge",
+                    "wrap": true
+                },
+                {
                     "type": "Image",
                     "spacing": "Default",
                     "url": "",
@@ -60,27 +65,27 @@ export const setCardSubtitle = (card: any, subtitle: string) => {
 }
 
 export const getCardImageLink = (card: any) => {
-    return card.body[1].url;
+    return card.body[2].url;
 }
 
 export const setCardImageLink = (card: any, imageLink?: string) => {
-    card.body[1].url = imageLink;
+    card.body[2].url = imageLink;
 }
 
 export const getCardSummary = (card: any) => {
-    return card.body[2].text;
-}
-
-export const setCardSummary = (card: any, summary?: string) => {
-    card.body[2].text = summary;
-}
-
-export const getCardAuthor = (card: any) => {
     return card.body[3].text;
 }
 
+export const setCardSummary = (card: any, summary?: string) => {
+    card.body[3].text = summary;
+}
+
+export const getCardAuthor = (card: any) => {
+    return card.body[4].text;
+}
+
 export const setCardAuthor = (card: any, author?: string) => {
-    card.body[3].text = author;
+    card.body[4].text = author;
 }
 
 export const getCardBtnTitle = (card: any) => {
