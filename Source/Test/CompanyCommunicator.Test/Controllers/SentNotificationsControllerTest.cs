@@ -296,7 +296,6 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Test.Controllers
             // Assert
             Assert.Equal(notification.Id, sentNotificationSummary.Id);
             Assert.Equal(notification.Title, sentNotificationSummary.Title);
-            Assert.Equal(notification.Subtitle, sentNotificationSummary.Subtitle);
             Assert.Equal(notification.SentDate, sentNotificationSummary.SentDate);
             Assert.Equal(notification.Failed, sentNotificationSummary.Failed);
             Assert.Equal(notification.TotalMessageCount, sentNotificationSummary.TotalMessageCount);
