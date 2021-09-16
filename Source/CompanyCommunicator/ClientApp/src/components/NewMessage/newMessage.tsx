@@ -392,7 +392,14 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
                                             autoComplete="off"
                                             fluid
                                         />
-
+                                        <Input className="inputField"
+                                            value={this.state.subtitle}
+                                            label="SubtitleText"
+                                            placeholder="PlaceHolderSubtitle"
+                                            onChange={this.onSubtitleChanged}
+                                            autoComplete="off"
+                                            fluid
+                                        />
 
                                         <Flex gap="gap.smaller" vAlign="end" className="inputField">
                                             <Input
