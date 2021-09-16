@@ -4,6 +4,7 @@
   "EmptyDraftMessages": "Sie haben keine Nachrichtenentwürfe.",
   "EmptySentMessages": "Sie haben keine gesendeten Nachrichten.",
   "TitleText": "Titel",
+  "SubtitleText": "",
   "PlaceHolderTitle": "Titel (erforderlich)",
   "Recipients": "Empfänger",
   "Sent": "Gesendet",
