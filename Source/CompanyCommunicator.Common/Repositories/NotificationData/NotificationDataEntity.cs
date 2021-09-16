@@ -30,6 +30,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.Notificat
         /// Gets or sets the title text of the notification's content.
         /// </summary>
         public string Title { get; set; }
+        public string Subtitle { get; set; }
 
         /// <summary>
         /// Gets or sets the image link of the notification's content.

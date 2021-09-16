@@ -12,7 +12,7 @@ import { Loader, List, Image, Button, DownloadIcon, AcceptIcon, Flex } from '@fl
 import * as microsoftTeams from "@microsoft/teams-js";
 import {
     getInitAdaptiveCard, setCardTitle, setCardImageLink, setCardSummary,
-    setCardAuthor, setCardBtn
+    setCardAuthor, setCardBtn,setCardSubtitle
 } from '../AdaptiveCard/adaptiveCard';
 import { ImageUtil } from '../../utility/imageutility';
 import { formatDate, formatDuration, formatNumber } from '../../i18n';
@@ -26,6 +26,7 @@ export interface IListItem {
 export interface IMessage {
     id: string;
     title: string;
+    subtitle: string;
     acknowledgements?: string;
     reactions?: string;
     responses?: string;
@@ -99,6 +100,7 @@ class StatusTaskModule extends React.Component<StatusTaskModuleProps, IStatusSta
                     loader: false
                 }, () => {
                     setCardTitle(this.card, this.state.message.title);
+                    setCardSubtitle(this.card, this.state.message.subtitle);
                     setCardImageLink(this.card, this.state.message.imageLink);
                     setCardSummary(this.card, this.state.message.summary);
                     setCardAuthor(this.card, this.state.message.author);

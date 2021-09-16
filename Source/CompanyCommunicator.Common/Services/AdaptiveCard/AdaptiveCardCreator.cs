@@ -23,6 +23,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.AdaptiveCard
         {
             return this.CreateAdaptiveCard(
                 notificationDataEntity.Title,
+                notificationDataEntity.Subtitle,
                 notificationDataEntity.ImageLink,
                 notificationDataEntity.Summary,
                 notificationDataEntity.Author,
@@ -34,6 +35,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.AdaptiveCard
         /// Create an adaptive card instance.
         /// </summary>
         /// <param name="title">The adaptive card's title value.</param>
+        /// <param name="subtitle">The adaptive card's subtitle value.</param>
         /// <param name="imageUrl">The adaptive card's image URL.</param>
         /// <param name="summary">The adaptive card's summary value.</param>
         /// <param name="author">The adaptive card's author value.</param>
@@ -42,6 +44,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.AdaptiveCard
         /// <returns>The created adaptive card instance.</returns>
         public AdaptiveCard CreateAdaptiveCard(
             string title,
+            string subtitle,
             string imageUrl,
             string summary,
             string author,
@@ -58,6 +61,15 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.AdaptiveCard
                 Weight = AdaptiveTextWeight.Bolder,
                 Wrap = true,
             });
+
+            if (!string.IsNullOrWhiteSpace(subtitle))
+            {
+                card.Body.Add(new AdaptiveTextBlock()
+                {
+                    Text = subtitle,
+                    Wrap = true,
+                });
+            }
 
             if (!string.IsNullOrWhiteSpace(imageUrl))
             {
