@@ -18,8 +18,9 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                 },
                 {
                     "type": "TextBlock",
-                    "size": "ExtraLarge",
-                    "wrap": true
+                    "size": "Large",
+                    "wrap": true,
+                    "text": "",
                 },
                 {
                     "type": "Image",
@@ -60,7 +61,7 @@ export const getCardSubtitle = (card: any) => {
     return card.body[1].text;
 }
 
-export const setCardSubtitle = (card: any, subtitle: string) => {
+export const setCardSubtitle = (card: any, subtitle?: string) => {
     card.body[1].text = subtitle;
 }
 

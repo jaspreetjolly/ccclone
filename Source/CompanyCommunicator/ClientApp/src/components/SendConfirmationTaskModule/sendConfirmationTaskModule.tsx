@@ -57,8 +57,7 @@ class SendConfirmationTaskModule extends React.Component<SendConfirmationTaskMod
     readonly localize: TFunction;
     private initMessage = {
         id: "",
-        title: "",
-        subtitle:""
+        title: ""
     };
 
     private card: any;

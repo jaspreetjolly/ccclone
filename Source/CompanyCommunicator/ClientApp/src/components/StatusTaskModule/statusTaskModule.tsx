@@ -26,7 +26,6 @@ export interface IListItem {
 export interface IMessage {
     id: string;
     title: string;
-    subtitle?: string;
     acknowledgements?: string;
     reactions?: string;
     responses?: string;
@@ -34,6 +33,7 @@ export interface IMessage {
     failed?: string;
     unknown?: string;
     sentDate?: string;
+    subtitle?: string;
     imageLink?: string;
     summary?: string;
     author?: string;
