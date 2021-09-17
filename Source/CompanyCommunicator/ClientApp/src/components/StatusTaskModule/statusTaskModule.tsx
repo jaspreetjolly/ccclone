@@ -64,8 +64,7 @@ class StatusTaskModule extends React.Component<StatusTaskModuleProps, IStatusSta
     readonly localize: TFunction;
     private initMessage = {
         id: "",
-        title: "",
-        subtitle: ""
+        title: ""
     };
 
     private card: any;
