@@ -250,7 +250,7 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
 
     public setDefaultCard = (card: any) => {
         const titleAsString = this.localize("TitleText");
-        const subtitleAsString = this.localize("SubtitleText");
+        const subtitleAsString = "SubTitle";
         const summaryAsString = this.localize("Summary");
         const authorAsString = this.localize("Author1");
         const buttonTitleAsString = this.localize("ButtonTitle");
@@ -394,8 +394,8 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
                                         />
                                         <Input className="inputField"
                                             value={this.state.subtitle}
-                                            label="SubtitleText"
-                                            placeholder="PlaceHolderSubtitle"
+                                            label="Subtitle"
+                                            placeholder="Subtitle"
                                             onChange={this.onSubtitleChanged}
                                             autoComplete="off"
                                             fluid
