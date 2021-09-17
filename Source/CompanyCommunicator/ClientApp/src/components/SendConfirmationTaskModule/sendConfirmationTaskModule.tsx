@@ -25,7 +25,6 @@ export interface IListItem {
 export interface IMessage {
     id: string;
     title: string;
-    subtitle: string;
     acknowledgements?: number;
     reactions?: number;
     responses?: number;
@@ -33,6 +32,7 @@ export interface IMessage {
     failed?: number;
     throttled?: number;
     sentDate?: string;
+    subtitle: string;
     imageLink?: string;
     summary?: string;
     author?: string;
@@ -57,7 +57,8 @@ class SendConfirmationTaskModule extends React.Component<SendConfirmationTaskMod
     readonly localize: TFunction;
     private initMessage = {
         id: "",
-        title: ""
+        title: "",
+        subtitle:""
     };
 
     private card: any;
