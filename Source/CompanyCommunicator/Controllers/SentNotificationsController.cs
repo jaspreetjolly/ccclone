@@ -212,6 +212,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Controllers
             {
                 Id = notificationEntity.Id,
                 Title = notificationEntity.Title,
+                Subtitle = notificationEntity.Subtitle,
                 ImageLink = notificationEntity.ImageLink,
                 Summary = notificationEntity.Summary,
                 Author = notificationEntity.Author,

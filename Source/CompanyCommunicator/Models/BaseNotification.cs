@@ -21,6 +21,10 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Models
         /// Gets or sets Title value.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets Subtitle value.
+        /// </summary>
         public string Subtitle { get; set; }
 
         /// <summary>
