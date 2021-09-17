@@ -32,7 +32,7 @@ export interface IMessage {
     failed?: number;
     throttled?: number;
     sentDate?: string;
-    subtitle: string;
+    subtitle?: string;
     imageLink?: string;
     summary?: string;
     author?: string;
