@@ -19,10 +19,10 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                 },
                 {
                     "type": "TextBlock",
-                    "size": "Large",
                     "wrap": true,
                     "text": "",
                     "fontType": "Arial",
+                    "isSubtitle": true
                 },
                 {
                     "type": "Image",
