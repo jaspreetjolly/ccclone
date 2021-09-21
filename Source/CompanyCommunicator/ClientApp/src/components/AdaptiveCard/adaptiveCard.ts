@@ -35,6 +35,7 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                 {
                     "type": "TextBlock",
                     "text": "",
+                    "size": "Medium",
                     "wrap": true,
                     "fontType": "Arial",
                 },
