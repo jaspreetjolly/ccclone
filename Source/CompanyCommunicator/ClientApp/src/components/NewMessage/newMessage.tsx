@@ -201,6 +201,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
                     loader: false
                 }, () => {
                     let adaptiveCard = new AdaptiveCards.AdaptiveCard();
+                    adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
+                        fontFamily: "Arial"
+                    });
                     adaptiveCard.parse(this.state.card);
                     let renderedCard = adaptiveCard.render();
                     document.getElementsByClassName('adaptiveCardContainer')[0].appendChild(renderedCard);
@@ -1023,6 +1026,9 @@ class NewMessage extends React.Component<INewMessageProps, formState> {
 
     private updateCard = () => {
         const adaptiveCard = new AdaptiveCards.AdaptiveCard();
+        adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
+            fontFamily: "Arial"
+        });
         adaptiveCard.parse(this.state.card);
         const renderedCard = adaptiveCard.render();
         const container = document.getElementsByClassName('adaptiveCardContainer')[0].firstChild;
