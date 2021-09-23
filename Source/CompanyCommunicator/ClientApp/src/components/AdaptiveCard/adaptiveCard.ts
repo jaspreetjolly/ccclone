@@ -15,14 +15,13 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                     "text": titleTextAsString,
                     "size": "ExtraLarge",
                     "wrap": true,
-                    "fontType":"Arial",
                 },
                 {
                     "type": "TextBlock",
                     "wrap": true,
+                    "size": "ExtraLarge",
                     "text": "",
-                    "fontType": "Arial",
-                    "isSubtitle": true
+                    "isSubtle": true
                 },
                 {
                     "type": "Image",
@@ -37,7 +36,6 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                     "text": "",
                     "size": "Medium",
                     "wrap": true,
-                    "fontType": "Arial",
                 },
                 {
                     "type": "TextBlock",
@@ -45,7 +43,6 @@ export const getInitAdaptiveCard = (t: TFunction) => {
                     "size": "Small",
                     "weight": "Lighter",
                     "text": "",
-                    "fontType": "Arial",
                 }
             ],
             "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
