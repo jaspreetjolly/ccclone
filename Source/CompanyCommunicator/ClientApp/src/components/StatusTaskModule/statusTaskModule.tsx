@@ -109,6 +109,9 @@ class StatusTaskModule extends React.Component<StatusTaskModuleProps, IStatusSta
                     }
 
                     let adaptiveCard = new AdaptiveCards.AdaptiveCard();
+                    adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
+                        fontFamily: "Arial"
+                    });
                     adaptiveCard.parse(this.card);
                     let renderedCard = adaptiveCard.render();
                     document.getElementsByClassName('adaptiveCardContainer')[0].appendChild(renderedCard);
