@@ -21,7 +21,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         private readonly IReactionDataRepository reactionDataRepository;
 
         /// <inheritdoc/>
-        public MessageReactionBot(IReactionDataRepository reactionDataRepository, ActivityLog log)
+        public MessageReactionBot(IReactionDataRepository reactionDataRepository)
         {
             this.reactionDataRepository = reactionDataRepository ?? throw new ArgumentNullException(nameof(reactionDataRepository));
         }
