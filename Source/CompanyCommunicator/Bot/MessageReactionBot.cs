@@ -15,20 +15,23 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
     using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionData;
     using Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions;
 
-    public class MessageReactionBot : ActivityHandler
+    /// <inheritdoc/>
+    public class MessageReactionBot 
     {
         private readonly IReactionDataRepository reactionDataRepository;
 
+        /// <inheritdoc/>
         public MessageReactionBot(IReactionDataRepository reactionDataRepository, ActivityLog log)
         {
             this.reactionDataRepository = reactionDataRepository ?? throw new ArgumentNullException(nameof(reactionDataRepository));
         }
 
-        protected virtual async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        /// <inheritdoc/>
+        public async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.ReactionsRemoved != null && turnContext.Activity.ReactionsAdded != null)
             {
-                await OnReactionsChangedAsync(turnContext.Activity.ReactionsRemoved, turnContext.Activity.ReactionsAdded, turnContext, cancellationToken).ConfigureAwait(false);
+                await this.OnReactionsChangedAsync(turnContext.Activity.ReactionsRemoved, turnContext.Activity.ReactionsAdded, turnContext, cancellationToken).ConfigureAwait(false);
             }
             else
             {
