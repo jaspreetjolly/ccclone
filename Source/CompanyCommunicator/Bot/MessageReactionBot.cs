@@ -16,7 +16,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
     using Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions;
 
     /// <inheritdoc/>
-    public class MessageReactionBot 
+    public class MessageReactionBot : ActivityHandler
     {
         private readonly IReactionDataRepository reactionDataRepository;
 
@@ -27,7 +27,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         }
 
         /// <inheritdoc/>
-        public async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        protected override async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.ReactionsRemoved != null && turnContext.Activity.ReactionsAdded != null)
             {
