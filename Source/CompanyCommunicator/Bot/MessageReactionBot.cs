@@ -17,57 +17,36 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
 
     public class MessageReactionBot : ActivityHandler
     {
-        private readonly ActivityLog _log;
         private readonly IReactionDataRepository reactionDataRepository;
 
         public MessageReactionBot(IReactionDataRepository reactionDataRepository, ActivityLog log)
         {
             this.reactionDataRepository = reactionDataRepository ?? throw new ArgumentNullException(nameof(reactionDataRepository));
-            _log = log;
         }
 
-        public async Task OnReactionsAddedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        protected virtual async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var reaction in messageReactions)
+            if (turnContext.Activity.ReactionsRemoved != null && turnContext.Activity.ReactionsAdded != null)
             {
-                // The ReplyToId property of the inbound MessageReaction Activity will correspond to a Message Activity which
-                // had previously been sent from this bot.
-                var activity = await _log.Find(turnContext.Activity.ReplyToId);
-                if (activity == null)
+                await OnReactionsChangedAsync(turnContext.Activity.ReactionsRemoved, turnContext.Activity.ReactionsAdded, turnContext, cancellationToken).ConfigureAwait(false);
+            }
+            else
+            {
+                if (turnContext.Activity.ReactionsAdded != null)
                 {
-                    // If we had sent the message from the error handler we wouldn't have recorded the Activity Id and so we
-                    // shouldn't expect to see it in the log.
-                    await SendMessageAndLogActivityId(turnContext, $"Activity {turnContext.Activity.ReplyToId} not found in the log.", cancellationToken);
+                    await this.reactionDataRepository.SaveReactionDataAsync(turnContext.Activity);
                 }
 
-                await this.reactionDataRepository.SaveReactionDataAsync(activity);
+                if (turnContext.Activity.ReactionsRemoved != null)
+                {
+                    await this.reactionDataRepository.RemoveReactionDataAsync(turnContext.Activity);
+                }
             }
         }
 
-        public async Task OnReactionsRemovedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        private Task OnReactionsChangedAsync(IList<MessageReaction> reactionsRemoved, IList<MessageReaction> reactionsAdded, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var reaction in messageReactions)
-            {
-                // The ReplyToId property of the inbound MessageReaction Activity will correspond to a Message Activity which
-                // was previously sent from this bot.
-                var activity = await _log.Find(turnContext.Activity.ReplyToId);
-                if (activity == null)
-                {
-                    // If we had sent the message from the error handler we wouldn't have recorded the Activity Id and so we
-                    // shouldn't expect to see it in the log.
-                    await SendMessageAndLogActivityId(turnContext, $"Activity {turnContext.Activity.ReplyToId} not found in the log.", cancellationToken);
-                }
-
-                await SendMessageAndLogActivityId(turnContext, $"You removed '{reaction.Type}' regarding '{activity.Text}'", cancellationToken);
-            }
-        }
-
-        public async Task SendMessageAndLogActivityId(ITurnContext turnContext, string text, CancellationToken cancellationToken)
-        {
-            // We need to record the Activity Id from the Activity just sent in order to understand what the reaction is a reaction too. 
-            var replyActivity = MessageFactory.Text(text);
-            var resourceResponse = await turnContext.SendActivityAsync(replyActivity, cancellationToken);
-            await _log.Append(resourceResponse.Id, replyActivity);
+            throw new NotImplementedException();
         }
     }
 }
