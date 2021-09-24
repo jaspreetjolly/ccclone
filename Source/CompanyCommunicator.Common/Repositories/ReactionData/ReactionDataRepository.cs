@@ -34,6 +34,16 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionD
         }
 
         /// <inheritdoc/>
+        public async Task EnsureReactionDataTableExistsAsync()
+        {
+            var exists = await this.Table.ExistsAsync();
+            if (!exists)
+            {
+                await this.Table.CreateAsync();
+            }
+        }
+
+        /// <inheritdoc/>
         public async Task<IEnumerable<ReactionDataEntity>> GetReactionDataEntitiesByIdsAsync(IEnumerable<string> reactionIds)
         {
             var rowKeysFilter = this.GetRowKeysFilter(reactionIds);
