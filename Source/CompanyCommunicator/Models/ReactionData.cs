@@ -23,11 +23,6 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Models
         /// <summary>
         /// Gets or sets user's Emotion.
         /// </summary>
-        public string Emotion { get; set; }
-
-        /// <summary>
-        /// Gets or sets DateTime.
-        /// </summary>
-        public string ReactionDateTime { get; set; }
+        public string Reaction { get; set; }
     }
 }
