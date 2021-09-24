@@ -23,7 +23,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
         /// <returns>A task that represents the work queued to execute.</returns>
         public static async Task SaveReactionDataAsync(
             this IReactionDataRepository reactionDataRepository,
-            IActivity activity)
+            IMessageReactionActivity activity)
         {
             var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(activity);
             if (reactionDataEntity != null)
@@ -40,7 +40,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
         /// <returns>A task that represents the work queued to execute.</returns>
         public static async Task RemoveReactionDataAsync(
             this IReactionDataRepository reactionDataRepository,
-            IActivity activity)
+            IMessageReactionActivity activity)
         {
             var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(activity);
             if (reactionDataEntity != null)
