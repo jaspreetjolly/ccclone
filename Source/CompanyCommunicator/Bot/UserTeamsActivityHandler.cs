@@ -6,12 +6,15 @@
 namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionData;
+    using Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions;
 
     /// <summary>
     /// Company Communicator User Bot.
@@ -20,6 +23,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
     public class UserTeamsActivityHandler : TeamsActivityHandler
     {
         private static readonly string TeamRenamedEventType = "teamRenamed";
+        private readonly IReactionDataRepository reactionDataRepository;
 
         private readonly TeamsDataCapture teamsDataCapture;
 
@@ -27,9 +31,26 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         /// Initializes a new instance of the <see cref="UserTeamsActivityHandler"/> class.
         /// </summary>
         /// <param name="teamsDataCapture">Teams data capture service.</param>
-        public UserTeamsActivityHandler(TeamsDataCapture teamsDataCapture)
+        /// <param name="reactionDataRepository"></param>
+        public UserTeamsActivityHandler(TeamsDataCapture teamsDataCapture, IReactionDataRepository reactionDataRepository)
         {
             this.teamsDataCapture = teamsDataCapture ?? throw new ArgumentNullException(nameof(teamsDataCapture));
+            this.reactionDataRepository = reactionDataRepository ?? throw new ArgumentNullException(nameof(reactionDataRepository));
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        {
+            System.Diagnostics.Trace.TraceError("If you're seeing this, something bad happened");
+            if (turnContext.Activity.ReactionsAdded != null)
+            {
+                await this.reactionDataRepository.SaveReactionDataAsync(turnContext.Activity);
+            }
+
+            if (turnContext.Activity.ReactionsRemoved != null)
+            {
+                await this.reactionDataRepository.RemoveReactionDataAsync(turnContext.Activity);
+            }
         }
 
         /// <summary>
