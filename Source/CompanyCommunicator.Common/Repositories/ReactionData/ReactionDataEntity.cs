@@ -29,6 +29,11 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionD
         public string ConversationID { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the user.
+        /// </summary>
+        public string User { get; set; }
+
+        /// <summary>
         /// Gets or sets the reaction.
         /// </summary>
         public string Reaction { get; set; }

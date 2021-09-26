@@ -69,6 +69,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
                     ConversationID = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
                     Name = activity.From.AadObjectId,
+                    User = activity.From.Name,
                     Reaction = reaction,
                 };
 
