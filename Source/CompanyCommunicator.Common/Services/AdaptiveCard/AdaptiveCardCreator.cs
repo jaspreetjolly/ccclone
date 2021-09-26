@@ -68,7 +68,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.AdaptiveCard
                 {
                     Text = subtitle,
                     Wrap = true,
-                    Weight = AdaptiveTextWeight.Lighter,
+                    Size = AdaptiveTextSize.Large,
                 });
             }
 
