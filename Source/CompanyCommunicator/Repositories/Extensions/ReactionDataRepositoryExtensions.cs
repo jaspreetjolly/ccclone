@@ -47,7 +47,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             string reaction,
             IMessageReactionActivity activity)
         {
-            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction,activity);
+            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity);
             if (reactionDataEntity != null)
             {
                 var found = await reactionDataRepository.GetAsync(ReactionDataTableNames.ReactionDataPartition, reactionDataEntity.ReactionId);
@@ -69,7 +69,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
                     ConversationID = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
                     Name = activity?.From?.AadObjectId,
-                    User = activity?.From?.Name,
+                    User = activity?.From?.Id,
                     Reaction = reaction,
                 };
 

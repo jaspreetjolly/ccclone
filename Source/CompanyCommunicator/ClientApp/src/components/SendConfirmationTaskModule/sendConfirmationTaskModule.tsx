@@ -107,12 +107,12 @@ class SendConfirmationTaskModule extends React.Component<SendConfirmationTaskMod
                             }
 
                             let adaptiveCard = new AdaptiveCards.AdaptiveCard();
+                            adaptiveCard.parse(this.card);
                             adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
                                 fontFamily: "Arial"
                             });
-                            adaptiveCard.parse(this.card);
                             let renderedCard = adaptiveCard.render();
-                            document.getElementsByClassName('adaptiveCardContainer')[0].appendChild(renderedCard);
+                            document.getElementsByClassName('adaptiveCardContainer')[0].appendChild(renderedCard).style.fontFamily='Arial';
                             if (this.state.message.buttonLink) {
                                 let link = this.state.message.buttonLink;
                                 adaptiveCard.onExecuteAction = function (action) { window.open(link, '_blank'); };
