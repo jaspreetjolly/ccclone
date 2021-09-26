@@ -58,7 +58,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             }
         }
 
-        private static ReactionDataEntity ParseReactionData(string reaction,IActivity activity)
+        private static ReactionDataEntity ParseReactionData(string reaction, IActivity activity)
         {
             if (activity != null)
             {
@@ -68,8 +68,8 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
                     RowKey = activity.ReplyToId,
                     ConversationID = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
-                    Name = activity.From.AadObjectId,
-                    User = activity.From.Name,
+                    Name = activity?.From?.AadObjectId,
+                    User = activity?.From?.Name,
                     Reaction = reaction,
                 };
 
