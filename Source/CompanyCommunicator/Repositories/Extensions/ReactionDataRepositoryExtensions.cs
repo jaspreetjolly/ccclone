@@ -19,13 +19,16 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
         /// Add channel data in Table Storage.
         /// </summary>
         /// <param name="reactionDataRepository">The reaction data repository.</param>
+        /// <param name="reaction"></param>
         /// <param name="activity">Bot conversation update activity instance.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         public static async Task SaveReactionDataAsync(
             this IReactionDataRepository reactionDataRepository,
+            string reaction,
             IMessageReactionActivity activity)
         {
-            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(activity);
+            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction,activity
+                );
             if (reactionDataEntity != null)
             {
                 await reactionDataRepository.CreateOrUpdateAsync(reactionDataEntity);
@@ -36,13 +39,15 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
         /// Remove channel data in table storage.
         /// </summary>
         /// <param name="reactionDataRepository">The reaction data repository.</param>
+        /// <param name="reaction"></param>
         /// <param name="activity">Bot conversation update activity instance.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         public static async Task RemoveReactionDataAsync(
             this IReactionDataRepository reactionDataRepository,
+            string reaction,
             IMessageReactionActivity activity)
         {
-            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(activity);
+            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction,activity);
             if (reactionDataEntity != null)
             {
                 var found = await reactionDataRepository.GetAsync(ReactionDataTableNames.ReactionDataPartition, reactionDataEntity.ReactionId);
@@ -53,7 +58,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             }
         }
 
-        private static ReactionDataEntity ParseReactionData(IActivity activity)
+        private static ReactionDataEntity ParseReactionData(string reaction,IActivity activity)
         {
             if (activity != null)
             {
@@ -63,7 +68,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
                     RowKey = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
                     Name = activity.From.Name,
-                    Reaction = activity.Type,
+                    Reaction = reaction,
                 };
 
                 return reactionsDataEntity;

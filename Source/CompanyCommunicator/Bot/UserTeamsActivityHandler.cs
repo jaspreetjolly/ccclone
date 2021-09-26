@@ -43,12 +43,50 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         {
             if (turnContext.Activity.ReactionsAdded != null)
             {
-                await this.reactionDataRepository.SaveReactionDataAsync(turnContext.Activity);
+                await this.OnReactionsAddedAsync(turnContext.Activity.ReactionsAdded, turnContext, cancellationToken);
             }
 
             if (turnContext.Activity.ReactionsRemoved != null)
             {
-                await this.reactionDataRepository.RemoveReactionDataAsync(turnContext.Activity);
+                await this.OnReactionsRemovedAsync(turnContext.Activity.ReactionsAdded, turnContext, cancellationToken);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnReactionsAddedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var reaction in messageReactions)
+            {
+                // The ReplyToId property of the inbound MessageReaction Activity will correspond to a Message Activity which
+                // had previously been sent from this bot.
+                var activity = turnContext.Activity;
+                if (activity == null)
+                {
+                    // If we had sent the message from the error handler we wouldn't have recorded the Activity Id and so we
+                    // shouldn't expect to see it in the log.
+                    throw new NotImplementedException();
+                }
+
+                await this.reactionDataRepository.SaveReactionDataAsync(reaction.Type,activity);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnReactionsRemovedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        {
+            foreach (var reaction in messageReactions)
+            {
+                // The ReplyToId property of the inbound MessageReaction Activity will correspond to a Message Activity which
+                // was previously sent from this bot.
+                var activity = turnContext.Activity;
+                if (activity == null)
+                {
+                    // If we had sent the message from the error handler we wouldn't have recorded the Activity Id and so we
+                    // shouldn't expect to see it in the log.
+                    throw new NotImplementedException();
+                }
+
+                await this.reactionDataRepository.RemoveReactionDataAsync(reaction.Type, activity);
             }
         }
 
