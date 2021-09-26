@@ -38,12 +38,12 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
             {
                 if (turnContext.Activity.ReactionsAdded != null)
                 {
-                    await this.reactionDataRepository.SaveReactionDataAsync(turnContext.Activity);
+                    await this.reactionDataRepository.SaveReactionDataAsync("",turnContext.Activity);
                 }
 
                 if (turnContext.Activity.ReactionsRemoved != null)
                 {
-                    await this.reactionDataRepository.RemoveReactionDataAsync(turnContext.Activity);
+                    await this.reactionDataRepository.RemoveReactionDataAsync("",turnContext.Activity);
                 }
             }
         }
