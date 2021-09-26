@@ -20,6 +20,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionD
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public Task EnsureReactionDataTableExistsAsync();
+
         /// <summary>
         /// Gets reaction data entities by ID values.
         /// </summary>

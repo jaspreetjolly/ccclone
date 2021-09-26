@@ -41,7 +41,6 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         /// <inheritdoc/>
         protected override async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
-            System.Diagnostics.Trace.TraceError("If you're seeing this, something bad happened");
             if (turnContext.Activity.ReactionsAdded != null)
             {
                 await this.reactionDataRepository.SaveReactionDataAsync(turnContext.Activity);
