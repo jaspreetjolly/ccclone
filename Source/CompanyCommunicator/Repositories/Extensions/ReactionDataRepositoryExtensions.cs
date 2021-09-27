@@ -64,7 +64,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             {
                 var reactionsDataEntity = new ReactionDataEntity
                 {
-                    PartitionKey = ReactionDataTableNames.ReactionDataPartition,
+                    PartitionKey = activity.From.Id,
                     RowKey = activity.ReplyToId,
                     ConversationID = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
