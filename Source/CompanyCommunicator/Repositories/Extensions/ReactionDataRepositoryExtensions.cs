@@ -50,11 +50,10 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity);
             if (reactionDataEntity != null)
             {
-                await reactionDataRepository.DeleteAsync(reactionDataEntity);
-                var found = await reactionDataRepository.GetAsync(ReactionDataTableNames.ReactionDataPartition, reactionDataEntity.ReactionId);
+                var found = await reactionDataRepository.GetAsync(reactionDataEntity.PartitionKey, reactionDataEntity.ReactionId);
                 if (found != null)
                 {
-                    await reactionDataRepository.DeleteAsync(reactionDataEntity);
+                    await reactionDataRepository.DeleteAsync(found);
                 }
             }
         }
