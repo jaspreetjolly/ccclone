@@ -29,6 +29,14 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories
         /// <returns>A task that represents the work queued to execute.</returns>
         public Task CreateOrUpdateAsync(T entity);
 
+
+        /// <summary>
+        /// Create or update an entity in the table storage.
+        /// </summary>
+        /// <param name="entity">Entity to be created or updated.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        public Task CreateAsync(T entity);
+
         /// <summary>
         /// Insert or merge an entity in the table storage.
         /// </summary>

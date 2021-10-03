@@ -31,7 +31,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
                 );
             if (reactionDataEntity != null)
             {
-                await reactionDataRepository.InsertOrMergeAsync(reactionDataEntity);
+                await reactionDataRepository.CreateOrUpdateAsync(reactionDataEntity);
             }
         }
 
