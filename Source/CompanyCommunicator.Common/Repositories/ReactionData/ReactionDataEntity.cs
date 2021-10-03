@@ -19,17 +19,17 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionD
         public string ReactionId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the user.
+        /// Gets or sets AAD ID of the user.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the user.
+        /// Gets or sets conversation ID.
         /// </summary>
         public string ConversationID { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the user.
+        /// Gets or sets user's ID.
         /// </summary>
         public string User { get; set; }
 
