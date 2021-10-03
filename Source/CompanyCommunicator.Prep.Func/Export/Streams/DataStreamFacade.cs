@@ -182,6 +182,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Prep.Func.Export.Streams
                                 Id = reactionDataEntity.ReactionId,
                                 Name = upn2,
                                 Reaction = reactionDataEntity.Reaction,
+                                ConversationId = reactionDataEntity.ConversationID,
                             };
                             reactionDataList.Add(reactionData);
                         }
