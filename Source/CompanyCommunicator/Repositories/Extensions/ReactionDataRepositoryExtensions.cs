@@ -27,11 +27,11 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             string reaction,
             IMessageReactionActivity activity)
         {
-            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction,activity
+            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity
                 );
             if (reactionDataEntity != null)
             {
-                await reactionDataRepository.CreateOrUpdateAsync(reactionDataEntity);
+                await reactionDataRepository.InsertOrMergeAsync(reactionDataEntity);
             }
         }
 

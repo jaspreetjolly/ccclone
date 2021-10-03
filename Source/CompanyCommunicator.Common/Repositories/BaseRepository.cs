@@ -74,6 +74,21 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories
         }
 
         /// <inheritdoc/>
+        public async Task CreateAsync(T entity)
+        {
+            try
+            {
+                var operation = TableOperation.Insert(entity);
+                await this.Table.ExecuteAsync(operation);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex, ex.Message);
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
         public async Task InsertOrMergeAsync(T entity)
         {
             try
