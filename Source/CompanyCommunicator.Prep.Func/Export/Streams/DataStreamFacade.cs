@@ -157,7 +157,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Prep.Func.Export.Streams
         /// get the reaction data streams.
         /// </summary>
         /// <param name="notificationId">the notification id.</param>
-        /// <returns>the streams of team data.</returns>
+        /// <returns>the streams of reaction data.</returns>
         public async IAsyncEnumerable<IEnumerable<ReactionData>> GetReactionDataStreamAsync(string notificationId)
         {
             if (notificationId == null)
