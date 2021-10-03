@@ -112,6 +112,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
                     await this.notificationService.UpdateSentNotification(
                         notificationId: messageContent.NotificationId,
                         recipientId: messageContent.RecipientData.RecipientId,
+                        messageId: messageId,
                         totalNumberOfSendThrottles: 0,
                         statusCode: SentNotificationDataEntity.NotSupportedStatusCode,
                         allSendStatusCodes: $"{SentNotificationDataEntity.NotSupportedStatusCode},",
@@ -133,6 +134,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
                     await this.notificationService.UpdateSentNotification(
                         notificationId: messageContent.NotificationId,
                         recipientId: messageContent.RecipientData.RecipientId,
+                        messageId: messageId,
                         totalNumberOfSendThrottles: 0,
                         statusCode: SentNotificationDataEntity.FinalFaultedStatusCode,
                         allSendStatusCodes: $"{SentNotificationDataEntity.FinalFaultedStatusCode},",
@@ -158,8 +160,10 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
                     maxAttempts: this.maxNumberOfAttempts,
                     logger: log);
 
+                var mId = messageActivity.Id;
+
                 // Process response.
-                await this.ProcessResponseAsync(messageContent, response, log);
+                await this.ProcessResponseAsync(messageContent, response, mId, log);
             }
             catch (InvalidOperationException exception)
             {
@@ -183,6 +187,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
                 await this.notificationService.UpdateSentNotification(
                     notificationId: messageContent.NotificationId,
                     recipientId: messageContent.RecipientData.RecipientId,
+                    messageId: messageId,
                     totalNumberOfSendThrottles: 0,
                     statusCode: statusCode,
                     allSendStatusCodes: $"{statusCode},",
@@ -201,6 +206,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
         private async Task ProcessResponseAsync(
             SendQueueMessageContent messageContent,
             SendMessageResponse sendMessageResponse,
+            string messageId,
             ILogger log)
         {
             if (sendMessageResponse.ResultType == SendMessageResult.Succeeded)
@@ -219,6 +225,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
             await this.notificationService.UpdateSentNotification(
                     notificationId: messageContent.NotificationId,
                     recipientId: messageContent.RecipientData.RecipientId,
+                    messageId: messageId,
                     totalNumberOfSendThrottles: sendMessageResponse.TotalNumberOfSendThrottles,
                     statusCode: sendMessageResponse.StatusCode,
                     allSendStatusCodes: sendMessageResponse.AllSendStatusCodes,
