@@ -27,11 +27,10 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             string reaction,
             IMessageReactionActivity activity)
         {
-            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity
-                );
+            var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity);
             if (reactionDataEntity != null)
             {
-                await reactionDataRepository.CreateOrUpdateAsync(reactionDataEntity);
+                await reactionDataRepository.CreateAsync(reactionDataEntity);
             }
         }
 
@@ -39,7 +38,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
         /// Remove channel data in table storage.
         /// </summary>
         /// <param name="reactionDataRepository">The reaction data repository.</param>
-        /// <param name="reaction"></param>
+        /// <param name="reaction">Reaction of User.</param>
         /// <param name="activity">Bot conversation update activity instance.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         public static async Task RemoveReactionDataAsync(
@@ -50,8 +49,8 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             var reactionDataEntity = ReactionDataRepositoryExtensions.ParseReactionData(reaction, activity);
             if (reactionDataEntity != null)
             {
-                var found = await reactionDataRepository.GetAsync(activity.From.Id, activity.ReplyToId);
-                if (found != null)
+                var found = await reactionDataRepository.GetAsync(ReactionDataTableNames.ReactionDataPartition, activity.ReplyToId);
+                if (found != null && found.Name == activity?.From?.AadObjectId)
                 {
                     await reactionDataRepository.DeleteAsync(found);
                 }
@@ -64,7 +63,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Repositories.Extensions
             {
                 var reactionsDataEntity = new ReactionDataEntity
                 {
-                    PartitionKey = activity.From.Id,
+                    PartitionKey = ReactionDataTableNames.ReactionDataPartition,
                     RowKey = activity.ReplyToId,
                     ConversationID = activity.Conversation.Id,
                     ReactionId = activity.ReplyToId,
