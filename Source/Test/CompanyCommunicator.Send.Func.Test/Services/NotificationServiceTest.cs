@@ -9,8 +9,8 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func.Test
     using System.Net;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionData;
     using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.NotificationData;
+    using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.ReactionData;
     using Microsoft.Teams.Apps.CompanyCommunicator.Common.Repositories.SentNotificationData;
     using Microsoft.Teams.Apps.CompanyCommunicator.Common.Services.MessageQueues.SendQueue;
     using Microsoft.Teams.Apps.CompanyCommunicator.Send.Func.Services;
@@ -238,7 +238,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func.Test
                 .Returns(Task.CompletedTask);
 
             // Act
-            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId,this.messageId, this.totalNumberOfSendThrottles, SentNotificationDataEntity.FaultedAndRetryingStatusCode, string.Empty, string.Empty);
+            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId, this.messageId, this.totalNumberOfSendThrottles, SentNotificationDataEntity.FaultedAndRetryingStatusCode, string.Empty, string.Empty);
 
             // Assert
             await task.Should().NotThrowAsync<Exception>();
@@ -267,7 +267,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func.Test
                 .Returns(Task.CompletedTask);
 
             // Act
-            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId,this.messageId, this.totalNumberOfSendThrottles, (int)HttpStatusCode.Created, string.Empty, string.Empty);
+            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId, this.messageId, this.totalNumberOfSendThrottles, (int)HttpStatusCode.Created, string.Empty, string.Empty);
 
             // Assert
             await task.Should().NotThrowAsync<Exception>();
@@ -354,7 +354,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func.Test
                 .Returns(Task.CompletedTask);
 
             // Act
-            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId,this.messageId, this.totalNumberOfSendThrottles, 11, string.Empty, string.Empty);
+            Func<Task> task = async () => await notificationService.UpdateSentNotification(this.notificationId, this.recipientId, this.messageId, this.totalNumberOfSendThrottles, 11, string.Empty, string.Empty);
 
             // Assert
             await task.Should().NotThrowAsync<Exception>();

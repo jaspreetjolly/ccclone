@@ -31,7 +31,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
         /// Initializes a new instance of the <see cref="UserTeamsActivityHandler"/> class.
         /// </summary>
         /// <param name="teamsDataCapture">Teams data capture service.</param>
-        /// <param name="reactionDataRepository"></param>
+        /// <param name="reactionDataRepository">Reaction Data.</param>
         public UserTeamsActivityHandler(TeamsDataCapture teamsDataCapture, IReactionDataRepository reactionDataRepository)
         {
             this.teamsDataCapture = teamsDataCapture ?? throw new ArgumentNullException(nameof(teamsDataCapture));
@@ -67,7 +67,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Bot
                     throw new NotImplementedException();
                 }
 
-                await this.reactionDataRepository.SaveReactionDataAsync(reaction.Type,activity);
+                await this.reactionDataRepository.SaveReactionDataAsync(reaction.Type, activity);
             }
         }
 

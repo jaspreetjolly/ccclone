@@ -202,6 +202,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Send.Func
         /// </summary>
         /// <param name="messageContent">Message content.</param>
         /// <param name="sendMessageResponse">Send notification response.</param>
+        /// <param name="messageId">Message Id.</param>
         /// <param name="log">Logger.</param>
         private async Task ProcessResponseAsync(
             SendQueueMessageContent messageContent,

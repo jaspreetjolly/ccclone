@@ -39,7 +39,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Prep.Func.Export.Streams
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStreamFacade"/> class.
         /// </summary>
-        /// <param name="reactionDataRepository">the sent notification data repository.</param>
+        /// <param name="reactionDataRepository">the reaction data repository.</param>
         /// <param name="sentNotificationDataRepository">the sent notification data repository.</param>
         /// <param name="teamDataRepository">the team data repository.</param>
         /// <param name="userDataRepository">the user data repository.</param>

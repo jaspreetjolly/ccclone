@@ -1,4 +1,4 @@
-﻿// <copyright file="Reaction.cs" company="Microsoft">
+﻿// <copyright file="ReactionData.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
