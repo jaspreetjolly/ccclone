@@ -22,7 +22,7 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator.Prep.Func.Export.Mappers
         public ReactionDataMap()
         {
             this.Map(x => x.Id).Name("Reaction_Id");
-            this.Map(x => x.Name).Name("User_Name");
+            this.Map(x => x.Name).Name("UPN");
             this.Map(x => x.Reaction).Name("Reaction");
             this.Map(x => x.ConversationId).Name("Conversation_Id");
         }
