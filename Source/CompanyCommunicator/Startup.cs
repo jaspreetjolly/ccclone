@@ -151,7 +151,6 @@ namespace Microsoft.Teams.Apps.CompanyCommunicator
 
             // Add bot services.
             services.AddTransient<TeamsDataCapture>();
-            services.AddTransient<MessageReactionBot>();
             services.AddTransient<TeamsFileUpload>();
             services.AddTransient<UserTeamsActivityHandler>();
             services.AddTransient<AuthorTeamsActivityHandler>();
